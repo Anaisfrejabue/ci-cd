@@ -22,6 +22,18 @@ stages:          # List of stages for jobs, and their order of execution
   - test  
   - deploy
 
+variables:
+  SCOOP_HOME: $CI_PROJECT_DIR\scoop
+
+before_script:
+  - choco install openssl.light -y
+    choco install curl -y     
+    $env:SCOOP="c:\scoop"     
+    iex (new-object net.webclient).downloadstring('https://get.scoop.sh')     
+    scoop install sudo     
+    scoop bucket add extras     
+    scoop install symfony
+
 
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
