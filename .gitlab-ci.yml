@@ -3,13 +3,13 @@ stages:          # List of stages for jobs, and their order of execution
   - UnitTests
   - test  
   - deploy
+  - release
 
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
     - echo "Compiling the code..."
     - echo "Compile complete."
-
 
 phpunit:
   image: php:7.4-apache
@@ -19,8 +19,6 @@ phpunit:
     - php bin/phpunit --filter=testcomputeTVAFoodProduct
     - php bin/phpunit --filter=testcomputeOtherTVAFoodProduct
 
-
-
 lint-test-job:
   stage: test    
   script:
@@ -28,10 +26,15 @@ lint-test-job:
     - sleep 10
     - echo "No lint issues found."
 
-
 deploy-job:
   stage: deploy  
   environment: production
   script:
     - echo "Deploying application..."
     - echo "Application successfully deployed."
+
+release-job:
+  stage: release
+  script:
+    - echo "Creating release..."
+    - echo "Release successfully created."
