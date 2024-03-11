@@ -26,10 +26,13 @@ build-job:       # This job runs in the build stage, which runs first.
     - echo "Compiling the code..."
     - echo "Compile complete."
 
-unit-test-job:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
+
+phpunit:
+  image: php:7.4-apache
+  stage: UnitTests
   script:
-    - echo "OK"
+    - php bin/phpunit
+
     # Assuming PHPUnit is installed locally in your project's vendor directory
 lint-test-job:   # This job also runs in the test stage.
   stage: test    # It can run at the same time as unit-test-job (in parallel).
@@ -42,6 +45,6 @@ deploy-job:      # This job runs in the deploy stage.
   environment: production
   script:
     - echo "Deploying application..."
-    - php -S 127.0.0.1:8000 -t public
+    - symfony server:start
     # Assuming your Symfony application is in the 'public' directory and you want to use the built-in PHP web server
     - echo "Application successfully deployed."
