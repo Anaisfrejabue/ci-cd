@@ -5,6 +5,9 @@ stages:          # List of stages for jobs, and their order of execution
   - deploy
   - release
 
+variables:
+  RELEASE_VERSION: "v1.0"  # Définir la version initiale
+
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
@@ -37,4 +40,8 @@ release-job:
   stage: release
   script:
     - echo "Creating release..."
-    - echo "Release successfully created."
+    - echo "Incrementing release version..."
+    - export RELEASE_VERSION=$(echo $RELEASE_VERSION | awk -F '.' '{$NF = $NF + 1;} 1' OFS='.')
+    - git tag $RELEASE_VERSION  # Création du tag avec la nouvelle version
+    - echo "Release successfully created and tagged as $RELEASE_VERSION."
+
