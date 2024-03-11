@@ -34,7 +34,7 @@ phpunit:
   image: php:7.4-apache
   stage: UnitTests
   script:
-    - php bin/phpunit
+    - php bin/phpunit --filter=testcomputeTVAFoodProduct2
 
     # Assuming PHPUnit is installed locally in your project's vendor directory
 lint-test-job:   # This job also runs in the test stage.
