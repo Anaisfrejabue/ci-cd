@@ -1,17 +1,10 @@
 stages:
   - build
   - UnitTests
-  - SecurityChecker  
+  - CodeCoverage  
   - release
   - deploy
   - pages
-
-before_script:
-  # Install Xdebug
-  - pecl install xdebug
-
-  # Enable Xdebug
-  - docker-php-ext-enable xdebug
 
 variables:
   RELEASE_MAJOR: 1
@@ -36,12 +29,11 @@ phpunit:
     - php bin/phpunit --filter=testcomputeOtherTVAFoodProduct
 
 lint-test-job:
-  image : jakzal/phpqa:php7.4
-  stage: SecurityChecker    
+  image : php:7.4-apache
+  stage: CodeCoverage    
   script:
     - echo "Linting code... This will take about 10 seconds."
-    - sleep 10
-    - echo "No lint issues found."
+    - php bin/phpunit --coverage-html public/test-coverage
 
 deploy-job:
   stage: deploy  
