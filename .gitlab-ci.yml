@@ -21,7 +21,7 @@ variables:
 build-job:     
   stage: build
   script:
-    - symfony server:start --php=C:\wamp64\bin\php\php7.4.33
+    - symfony local:server:start
 
 phpunit:
   image: php:7.4-apache
