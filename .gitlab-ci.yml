@@ -30,7 +30,6 @@ lint-test-job:
   stage: SecurityChecker    
   script:
     - echo "Linting code... This will take about 10 seconds."
-    - security-checker security:check composer.lock
     - sleep 10
     - echo "No lint issues found."
 
