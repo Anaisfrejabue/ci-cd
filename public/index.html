@@ -1,19 +1,64 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Mon premier site</title>
-  </head>
-  <body>
-    <p>
-      Nullam consequat varius eros, vitae volutpat arcu consequat quis. Praesent ac magna
-      quis nisl mattis pulvinar sit amet vitae ipsum. Integer nec pretium erat,
-      vitae tempus est. Phasellus id viverra mauris. Sed accumsan ac sapien at accumsan.
-      Suspendisse ut enim eget urna vulputate ultrices. Vivamus id scelerisque leo.
-      Sed mi purus, consectetur non dapibus a, tincidunt a massa.
-      Etiam blandit egestas lectus, vitae lobortis leo consequat et.
-      Aenean volutpat lectus vel magna imperdiet tincidunt.
-    </p>
-  </body>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'accueil</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .message {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            position: relative;
+        }
+        
+        .confetti {
+            width: 10px;
+            height: 10px;
+            background-color: #f00; /* Couleur des confettis */
+            position: absolute;
+            top: 0;
+            animation: confetti 3s linear infinite;
+        }
+        
+        @keyframes confetti {
+            0% {
+                transform: translateY(0) rotateZ(0);
+            }
+            100% {
+                transform: translateY(100vh) rotateZ(1080deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        Félicitations ! La pipeline est finie, le déploiement a bien été réalisé !
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+    </div>
+</body>
 </html>
