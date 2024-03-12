@@ -9,7 +9,7 @@ stages:          # List of stages for jobs, and their order of execution
 before_script:
   - echo "Installing Symfony CLI..."
   - wget https://get.symfony.com/cli/installer -O - | bash
-  - export PATH="$HOME/.symfony/bin:$PATH"
+  - export PATH="$HOME/.symfony5/bin:$PATH"
   - echo "Symfony CLI installed."
 
 variables:
@@ -21,12 +21,6 @@ variables:
 build-job:     
   stage: build
   script:
-    - echo "Installing Scoop..."
-    - powershell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; iex (new-object net.webclient).downloadstring('https://get.scoop.sh')"
-    - echo "Scoop installed."
-    - echo "Installing Symfony CLI..."
-    - scoop install symfony-cli
-    - echo "Symfony CLI installed."
     - symfony server:start
 
 phpunit:
