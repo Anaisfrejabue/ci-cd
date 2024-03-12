@@ -6,11 +6,8 @@ stages:          # List of stages for jobs, and their order of execution
   - deploy
   - pages
 
-before_script:
-  - echo "Installing Symfony CLI..."
-  - wget https://get.symfony.com/cli/installer -O - | bash
-  - export PATH="$HOME/.symfony5/bin:$PATH"
-  - echo "Symfony CLI installed."
+
+
 
 variables:
   RELEASE_MAJOR: 1
@@ -19,11 +16,14 @@ variables:
   RELEASE_VERSION: "v.$RELEASE_MAJOR.$RELEASE_MINOR.$RELEASE_PATCH"
 
 build-job:   
-  stage: build
-  image: php:7.4-apache  
+  stage: build  
   script:
-    - symfony server:ca:install
-    - symfony local:server:start
+  - echo "Installing Symfony CLI..."
+  - wget https://get.symfony.com/cli/installer -O - | bash
+  - export PATH="$HOME/.symfony5/bin:$PATH"
+  - echo "Symfony CLI installed."
+  - symfony server:ca:install
+  - symfony local:server:start
 
 phpunit:
   image: php:7.4-apache
