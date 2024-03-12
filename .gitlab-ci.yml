@@ -19,7 +19,6 @@ build-job:
   - wget https://get.symfony.com/cli/installer -O - | bash
   - /root/.symfony5/bin/symfony
   - echo "Symfony CLI installed."
-  - server:start
 
 phpunit:
   image: php:7.4-apache
