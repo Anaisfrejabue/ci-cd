@@ -61,7 +61,7 @@ pages:
   stage: pages
   script:
     - echo "Building and deploying GitLab Pages..."
-    - cp index.html public/index.html  # Copier le fichier base.html.twig vers le répertoire public
+    - cp public/index.html public/index.html  # Copier le fichier base.html.twig vers le répertoire public
     - echo "GitLab Pages built and deployed successfully."
 
   artifacts:
