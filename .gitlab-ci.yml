@@ -6,9 +6,6 @@ stages:          # List of stages for jobs, and their order of execution
   - deploy
   - pages
 
-
-
-
 variables:
   RELEASE_MAJOR: 1
   RELEASE_MINOR: 0
@@ -22,8 +19,7 @@ build-job:
   - wget https://get.symfony.com/cli/installer -O - | bash
   - /root/.symfony5/bin/symfony
   - echo "Symfony CLI installed."
-  - symfony server:ca:install
-  - symfony local:server:start
+  - server:start
 
 phpunit:
   image: php:7.4-apache
