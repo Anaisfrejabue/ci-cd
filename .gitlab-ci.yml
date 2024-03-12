@@ -59,7 +59,7 @@ pages:
   stage: pages
   script:
     - echo "Building and deploying GitLab Pages..."
-    - cp -r public/* public/templates/base.html.twig .  # Copier le contenu des pages dans la racine du répertoire du projet
+    - cp templates/base.html.twig public/  # Copier le fichier index.html vers le répertoire public
     - git add .  # Ajouter le contenu des pages pour le commit
     - git commit -m "Add GitLab Pages content"  # Commit du contenu des pages
     - git push origin $CI_COMMIT_BRANCH  # Pousser le commit contenant les pages vers la branche
