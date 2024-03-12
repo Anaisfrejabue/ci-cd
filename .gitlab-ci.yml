@@ -17,7 +17,7 @@ build-job:
   script:
   - echo "Installing Symfony CLI..."
   - wget https://get.symfony.com/cli/installer -O - | bash
-  - /root/.symfony5/bin/symfony
+  - /export PATH="$HOME/.symfony5/bin:$PATH"
   - echo "Symfony CLI installed."
 
 phpunit:
