@@ -591,7 +591,9 @@ class ComposerStaticInitd93aa0a14756fb53c9c2866fe0352be0
     );
 
     public static $classMap = array (
+        'App\\Entity\\Product' => __DIR__ . '/../..' . '/src/Entity/Product.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
+        'App\\Tests\\Entity\\ProductTest' => __DIR__ . '/../..' . '/tests/Entity/ProductTest.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'CURLStringFile' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
         'Collator' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/Collator.php',

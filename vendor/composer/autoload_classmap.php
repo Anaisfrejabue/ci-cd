@@ -6,7 +6,9 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Entity\\Product' => $baseDir . '/src/Entity/Product.php',
     'App\\Kernel' => $baseDir . '/src/Kernel.php',
+    'App\\Tests\\Entity\\ProductTest' => $baseDir . '/tests/Entity/ProductTest.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'CURLStringFile' => $vendorDir . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
     'Collator' => $vendorDir . '/symfony/intl/Resources/stubs/Collator.php',
