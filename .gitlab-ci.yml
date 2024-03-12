@@ -18,9 +18,9 @@ variables:
   RELEASE_PATCH: $CI_PIPELINE_IID
   RELEASE_VERSION: "v.$RELEASE_MAJOR.$RELEASE_MINOR.$RELEASE_PATCH"
 
-build-job:  
-  image: php:7.4-apache   
+build-job:   
   stage: build
+  image: php:7.4-apache  
   script:
     - symfony server:ca:install
     - symfony local:server:start
