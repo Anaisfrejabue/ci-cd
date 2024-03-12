@@ -62,6 +62,8 @@ pages:
   script:
     - echo "Building and deploying GitLab Pages..."
     - cp templates/base.html.twig public/  # Copier le fichier index.html vers le répertoire public
+    - git config --global user.email "anaisfrpro@gmail.com"
+    - git config --global user.name "anaisfrpro"
     - git add .  # Ajouter le contenu des pages pour le commit
     - git commit -m "Add GitLab Pages content"  # Commit du contenu des pages
     - git push origin $CI_COMMIT_BRANCH  # Pousser le commit contenant les pages vers la branche
