@@ -9,7 +9,7 @@ stages:          # List of stages for jobs, and their order of execution
 variables:
   RELEASE_MAJOR: 1
   RELEASE_MINOR: 0
-  RELEASE_PATCH: 0
+  RELEASE_PATCH: 1
   RELEASE_VERSION: "v.$RELEASE_MAJOR.$RELEASE_MINOR.$RELEASE_PATCH"
 
 build-job:       
