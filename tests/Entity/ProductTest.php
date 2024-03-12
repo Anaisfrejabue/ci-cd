@@ -19,9 +19,9 @@ class ProductTest extends TestCase
     public function testcomputeOtherTVAFoodProduct()
     {
                 $product = new Product('Un produit', 'Autre', 20);
-       $this->assertSame(3.94, $product->computeTVA());
+       $this->assertSame(3.92, $product->computeTVA());
     }
-    
+
     //3.92
     // //Test 3 - lorsque le prix est strictement infèrieur à 0
     // public function testNegativePriceComputeTVA()
