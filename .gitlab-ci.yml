@@ -2,13 +2,13 @@ stages:          # List of stages for jobs, and their order of execution
   - build
   - UnitTests
   - test  
+  - release_job
   - deploy
-  - release
 
 variables:
-  RELEASE_VERSION: "v1.0"  # Définir la version initiale
+  RELEASE_VERSION: "v1.0"
 
-build-job:       # This job runs in the build stage, which runs first.
+build-job:       
   stage: build
   script:
     - echo "Compiling the code..."
@@ -36,12 +36,17 @@ deploy-job:
     - echo "Deploying application..."
     - echo "Application successfully deployed."
 
-release-job:
+release_job:
   stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never                                  # Do not run this job when a tag is created manually
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH  # Run this job when commits are pushed or merged to the default branch
   script:
-    - echo "Creating release..."
-    - echo "Incrementing release version..."
-    - export RELEASE_VERSION=$(echo $RELEASE_VERSION | awk -F '.' '{$NF = $NF + 1;} 1' OFS='.')
-    - git tag $RELEASE_VERSION  # Création du tag avec la nouvelle version
-    - echo "Release successfully created and tagged as $RELEASE_VERSION."
+    - echo "running release_job for $TAG"
+  release:                                         # See https://docs.gitlab.com/ee/ci/yaml/#release for available properties
+    tag_name: 'v0.$CI_PIPELINE_IID'                # The version is incremented per pipeline.
+    description: 'v0.$CI_PIPELINE_IID'
+    ref: '$CI_COMMIT_SHA'                          # The tag is created from the pipeline SHA.
 
