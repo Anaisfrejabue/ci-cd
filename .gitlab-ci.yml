@@ -4,6 +4,7 @@ stages:          # List of stages for jobs, and their order of execution
   - SecurityChecker  
   - release
   - deploy
+  - pages
 
 variables:
   RELEASE_MAJOR: 1
@@ -53,3 +54,13 @@ release_job:
     tag_name: "$RELEASE_VERSION"
     description: "$RELEASE_VERSION"
     ref: '$CI_COMMIT_SHA'
+
+pages:
+  stage: pages
+  script:
+    - echo "Building and deploying GitLab Pages..."
+    - cp -r public/* public/index.html .  # Copier le contenu des pages dans la racine du répertoire du projet
+    - git add .  # Ajouter le contenu des pages pour le commit
+    - git commit -m "Add GitLab Pages content"  # Commit du contenu des pages
+    - git push origin $CI_COMMIT_BRANCH  # Pousser le commit contenant les pages vers la branche
+    - echo "GitLab Pages built and deployed successfully."
