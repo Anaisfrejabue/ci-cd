@@ -13,12 +13,12 @@
         flex-direction: column;
         height: 100vh;
         margin: 0;
-        background-color: #f0f0f0;
-        position: relative;
+        background-image: linear-gradient(to right, #007bff, #007bff, #007bff, #007bff, #fff, #fff, #fff, #fff); /* Gradient bleu à blanc */
+        animation: computerFlow 10s linear infinite;
       }
 
       .icon {
-        font-size: 64px; /* Augmente la taille de l'icône */
+        font-size: 100px; /* Augmente la taille de l'icône */
         color: #4a90e2;
         margin-bottom: 40px; /* Ajoute un espace supplémentaire en dessous de l'icône */
       }
@@ -35,63 +35,9 @@
         max-width: 600px; /* Limite la largeur du paragraphe */
       }
 
-      .confetti {
-        width: 10px;
-        height: 10px;
-        background-color: #f00; /* Couleur des confettis */
-        position: absolute;
-        animation: confetti 3s linear infinite;
-      }
-
-      @keyframes confetti {
-        0% {
-          transform: translateY(0) rotateZ(0);
-        }
-        100% {
-          transform: translateY(100vh) rotateZ(1080deg);
-        }
-      }
-
-      /* Ajoute des confettis sur les côtés et les coins */
-      .confetti.left {
-        left: -20px;
-        animation-delay: 0.5s;
-      }
-
-      .confetti.right {
-        right: -20px;
-        animation-delay: 1s;
-      }
-
-      .confetti.corner {
-        width: 20px;
-        height: 20px;
-        animation-duration: 4s;
-        animation-delay: 0.2s;
-      }
-
-      .confetti.top-left {
-        top: -20px;
-        left: -20px;
-        animation-delay: 1.5s;
-      }
-
-      .confetti.top-right {
-        top: -20px;
-        right: -20px;
-        animation-delay: 2s;
-      }
-
-      .confetti.bottom-left {
-        bottom: -20px;
-        left: -20px;
-        animation-delay: 2.5s;
-      }
-
-      .confetti.bottom-right {
-        bottom: -20px;
-        right: -20px;
-        animation-delay: 3s;
+      @keyframes computerFlow {
+        0% { background-position: 0 0; }
+        100% { background-position: 100% 0; }
       }
     </style>
   </head>
@@ -102,27 +48,5 @@
     <p>
       Félicitations ! La pipeline est finie, le déploiement a bien été réalisé !
     </p>
-    <div class="confetti" style="background-color: #f00;"></div>
-    <div class="confetti" style="background-color: #00f;"></div>
-    <div class="confetti" style="background-color: #0f0;"></div>
-    <div class="confetti" style="background-color: #ff0;"></div>
-    <div class="confetti" style="background-color: #0ff;"></div>
-    <div class="confetti" style="background-color: #f0f;"></div>
-    <div class="confetti" style="background-color: #800080;"></div>
-    <div class="confetti" style="background-color: #008000;"></div>
-    <div class="confetti" style="background-color: #800000;"></div>
-    <div class="confetti" style="background-color: #808000;"></div>
-    <div class="confetti" style="background-color: #008080;"></div>
-    <div class="confetti" style="background-color: #800080;"></div>
-    <div class="confetti left" style="background-color: #f00;"></div>
-    <div class="confetti left" style="background-color: #00f;"></div>
-    <div class="confetti left" style="background-color: #0f0;"></div>
-    <div class="confetti right" style="background-color: #ff0;"></div>
-    <div class="confetti right" style="background-color: #0ff;"></div>
-    <div class="confetti right" style="background-color: #f0f;"></div>
-    <div class="confetti corner top-left" style="background-color: #800080;"></div>
-    <div class="confetti corner top-right" style="background-color: #008000;"></div>
-    <div class="confetti corner bottom-left" style="background-color: #800000;"></div>
-    <div class="confetti corner bottom-right" style="background-color: #808000;"></div>
   </body>
 </html>
