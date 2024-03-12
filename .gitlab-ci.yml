@@ -12,7 +12,8 @@ variables:
   RELEASE_PATCH: $CI_PIPELINE_IID
   RELEASE_VERSION: "v.$RELEASE_MAJOR.$RELEASE_MINOR.$RELEASE_PATCH"
 
-build-job:       
+build-job:  
+  image: mcr.microsoft.com/powershell:latest     
   stage: build
   script:
     - echo "Installing Scoop..."
