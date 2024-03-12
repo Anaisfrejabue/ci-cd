@@ -6,6 +6,13 @@ stages:
   - deploy
   - pages
 
+before_script:
+  # Install Xdebug
+  - pecl install xdebug
+
+  # Enable Xdebug
+  - docker-php-ext-enable xdebug
+
 variables:
   RELEASE_MAJOR: 1
   RELEASE_MINOR: 0
