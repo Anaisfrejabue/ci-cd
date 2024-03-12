@@ -20,7 +20,7 @@ build-job:
   script:
   - echo "Installing Symfony CLI..."
   - wget https://get.symfony.com/cli/installer -O - | bash
-  - export PATH="$HOME/.symfony5/bin:$PATH"
+  - /root/.symfony5/bin/symfony
   - echo "Symfony CLI installed."
   - symfony server:ca:install
   - symfony local:server:start
