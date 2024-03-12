@@ -6,14 +6,19 @@ stages:          # List of stages for jobs, and their order of execution
   - deploy
   - pages
 
+before_script:
+  - echo "Installing Symfony CLI..."
+  - wget https://get.symfony.com/cli/installer -O - | bash
+  - export PATH="$HOME/.symfony/bin:$PATH"
+  - echo "Symfony CLI installed."
+
 variables:
   RELEASE_MAJOR: 1
   RELEASE_MINOR: 0
   RELEASE_PATCH: $CI_PIPELINE_IID
   RELEASE_VERSION: "v.$RELEASE_MAJOR.$RELEASE_MINOR.$RELEASE_PATCH"
 
-build-job:  
-  image: mcr.microsoft.com/powershell:latest     
+build-job:     
   stage: build
   script:
     - echo "Installing Scoop..."
