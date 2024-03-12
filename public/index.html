@@ -1,64 +1,76 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page d'accueil</title>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Mon premier site</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+        position: relative;
+      }
+
+      .icon {
+        font-size: 48px;
+        color: #4a90e2;
+        margin-bottom: 20px;
+      }
+
+      p {
+        text-align: center;
+        font-size: 24px;
+        color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        position: relative;
+      }
+
+      .confetti {
+        width: 10px;
+        height: 10px;
+        background-color: #f00; /* Couleur des confettis */
+        position: absolute;
+        top: 0;
+        animation: confetti 3s linear infinite;
+      }
+
+      @keyframes confetti {
+        0% {
+          transform: translateY(0) rotateZ(0);
         }
-        
-        .message {
-            text-align: center;
-            color: #333;
-            font-size: 24px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            position: relative;
+        100% {
+          transform: translateY(100vh) rotateZ(1080deg);
         }
-        
-        .confetti {
-            width: 10px;
-            height: 10px;
-            background-color: #f00; /* Couleur des confettis */
-            position: absolute;
-            top: 0;
-            animation: confetti 3s linear infinite;
-        }
-        
-        @keyframes confetti {
-            0% {
-                transform: translateY(0) rotateZ(0);
-            }
-            100% {
-                transform: translateY(100vh) rotateZ(1080deg);
-            }
-        }
+      }
     </style>
-</head>
-<body>
-    <div class="message">
-        Félicitations ! La pipeline est finie, le déploiement a bien été réalisé !
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
-        <div class="confetti"></div>
+  </head>
+  <body>
+    <div class="icon">
+      <i class="fab fa-gitlab"></i>
     </div>
-</body>
+    <p>
+      Félicitations ! La pipeline est finie, le déploiement a bien été réalisé !
+    </p>
+    <div class="confetti" style="background-color: #f00;"></div>
+    <div class="confetti" style="background-color: #00f;"></div>
+    <div class="confetti" style="background-color: #0f0;"></div>
+    <div class="confetti" style="background-color: #ff0;"></div>
+    <div class="confetti" style="background-color: #0ff;"></div>
+    <div class="confetti" style="background-color: #f0f;"></div>
+    <div class="confetti" style="background-color: #800080;"></div>
+    <div class="confetti" style="background-color: #008000;"></div>
+    <div class="confetti" style="background-color: #800000;"></div>
+    <div class="confetti" style="background-color: #808000;"></div>
+    <div class="confetti" style="background-color: #008080;"></div>
+    <div class="confetti" style="background-color: #800080;"></div>
+  </body>
 </html>
