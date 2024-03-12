@@ -26,9 +26,11 @@ phpunit:
     - php bin/phpunit --filter=testcomputeOtherTVAFoodProduct
 
 lint-test-job:
-  stage: test    
+  image : jakzal/phpqa:php7.4
+  stage: SecurityChecker    
   script:
     - echo "Linting code... This will take about 10 seconds."
+    - security-checker security:check composer.lock
     - sleep 10
     - echo "No lint issues found."
 
