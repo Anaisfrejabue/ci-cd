@@ -19,6 +19,7 @@ build-job:
   - wget https://get.symfony.com/cli/installer -O - | bash
   - export PATH="$HOME/.symfony5/bin:$PATH"
   - echo "Symfony CLI installed."
+  - symfony server:start
 
 phpunit:
   image: php:7.4-apache
@@ -63,7 +64,7 @@ pages:
     - echo "Building and deploying GitLab Pages..."
     - cp templates/base.html.twig public/index.html  # Copier le fichier base.html.twig vers le répertoire public
     - echo "GitLab Pages built and deployed successfully."
-    - symfony server:start
+
   artifacts:
     paths:
       - public/
