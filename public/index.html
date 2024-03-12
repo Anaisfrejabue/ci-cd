@@ -18,9 +18,9 @@
       }
 
       .icon {
-        font-size: 48px;
+        font-size: 64px; /* Augmente la taille de l'icône */
         color: #4a90e2;
-        margin-bottom: 20px;
+        margin-bottom: 40px; /* Ajoute un espace supplémentaire en dessous de l'icône */
       }
 
       p {
@@ -32,6 +32,7 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         background-color: #fff;
         position: relative;
+        max-width: 600px; /* Limite la largeur du paragraphe */
       }
 
       .confetti {
@@ -39,7 +40,6 @@
         height: 10px;
         background-color: #f00; /* Couleur des confettis */
         position: absolute;
-        top: 0;
         animation: confetti 3s linear infinite;
       }
 
@@ -50,6 +50,48 @@
         100% {
           transform: translateY(100vh) rotateZ(1080deg);
         }
+      }
+
+      /* Ajoute des confettis sur les côtés et les coins */
+      .confetti.left {
+        left: -20px;
+        animation-delay: 0.5s;
+      }
+
+      .confetti.right {
+        right: -20px;
+        animation-delay: 1s;
+      }
+
+      .confetti.corner {
+        width: 20px;
+        height: 20px;
+        animation-duration: 4s;
+        animation-delay: 0.2s;
+      }
+
+      .confetti.top-left {
+        top: -20px;
+        left: -20px;
+        animation-delay: 1.5s;
+      }
+
+      .confetti.top-right {
+        top: -20px;
+        right: -20px;
+        animation-delay: 2s;
+      }
+
+      .confetti.bottom-left {
+        bottom: -20px;
+        left: -20px;
+        animation-delay: 2.5s;
+      }
+
+      .confetti.bottom-right {
+        bottom: -20px;
+        right: -20px;
+        animation-delay: 3s;
       }
     </style>
   </head>
@@ -72,5 +114,15 @@
     <div class="confetti" style="background-color: #808000;"></div>
     <div class="confetti" style="background-color: #008080;"></div>
     <div class="confetti" style="background-color: #800080;"></div>
+    <div class="confetti left" style="background-color: #f00;"></div>
+    <div class="confetti left" style="background-color: #00f;"></div>
+    <div class="confetti left" style="background-color: #0f0;"></div>
+    <div class="confetti right" style="background-color: #ff0;"></div>
+    <div class="confetti right" style="background-color: #0ff;"></div>
+    <div class="confetti right" style="background-color: #f0f;"></div>
+    <div class="confetti corner top-left" style="background-color: #800080;"></div>
+    <div class="confetti corner top-right" style="background-color: #008000;"></div>
+    <div class="confetti corner bottom-left" style="background-color: #800000;"></div>
+    <div class="confetti corner bottom-right" style="background-color: #808000;"></div>
   </body>
 </html>
