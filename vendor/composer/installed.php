@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '09a17a854e1d03ac580e6bb948a15673c7f66e7a',
+        'reference' => '9ff811cd02c73d45273ced1e03badfa2a328ccd9',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '09a17a854e1d03ac580e6bb948a15673c7f66e7a',
+            'reference' => '9ff811cd02c73d45273ced1e03badfa2a328ccd9',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -289,6 +289,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'phpstan/phpstan' => array(
+            'pretty_version' => '1.10.66',
+            'version' => '1.10.66.0',
+            'reference' => '94779c987e4ebd620025d9e5fdd23323903950bd',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpstan/phpstan',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'phpunit/php-code-coverage' => array(
             'pretty_version' => '9.2.31',
             'version' => '9.2.31.0',
@@ -430,6 +439,15 @@
             'provided' => array(
                 0 => '1.0|2.0',
             ),
+        ),
+        'rector/rector' => array(
+            'pretty_version' => '1.0.4',
+            'version' => '1.0.4.0',
+            'reference' => '6e04d0eb087aef707fa0c5686d33d6ff61f4a555',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../rector/rector',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'sebastian/cli-parser' => array(
             'pretty_version' => '1.0.2',
