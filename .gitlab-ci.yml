@@ -45,6 +45,7 @@ php_cs_fixer:
 
 rector:
   stage: Rector
+  image: php:8.0
   script:
     -  php vendor/bin/rector process --dry-run
   allow_failure: true
