@@ -7,13 +7,6 @@ stages:
   - Rector
   - release
 
-
-before_script:
-  - apt-get update -yqq
-  - apt-get install git unzip -yqq
-  - curl -sS https://getcomposer.org/installer | php
-  - php composer.phar install --prefer-dist --no-progress --no-suggest
-
 variables:
   RELEASE_MAJOR: 1
   RELEASE_MINOR: 0
