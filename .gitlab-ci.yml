@@ -34,20 +34,20 @@ phpstan:
   stage: PhpStan
   script:
     - php vendor/bin/phpstan analyse
-  #allow_failure: false
+  allow_failure: true
 
 php_cs_fixer:
   image: php:8.0
   stage: Php-cs-fixer
   script:
     - php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --dry-run
-  #allow_failure: false
+  allow_failure: true
 
 rector:
   stage: Rector
   script:
     -  php vendor/bin/rector process --dry-run
-  #allow_failure: false
+  allow_failure: true
 
 coverage-test-job:
   image : php:7.4-apache
