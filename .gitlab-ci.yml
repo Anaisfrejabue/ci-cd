@@ -32,19 +32,19 @@ phpunit:
 phpstan:
   stage: PhpStan
   script:
-    - vendor/bin/phpstan analyse src --level max
+    - php vendor/bin/phpstan analyse
   #allow_failure: false
 
 php_cs_fixer:
   stage: Php-cs-fixer
   script:
-    - vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --dry-run --diff
+    - php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --dry-run
   #allow_failure: false
 
 rector:
   stage: Rector
   script:
-    - vendor/bin/rector process src --dry-run
+    -  php vendor/bin/rector process --dry-run
   #allow_failure: false
 
 coverage-test-job:
