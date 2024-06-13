@@ -1,10 +1,18 @@
 stages:
   - build
   - UnitTests
-  - CodeCoverage  
+  - CodeCoverage
+  - PhpStan
+  - Php-cs-fixer
+  - Rector
   - release
-  - deploy
-  - pages
+
+
+before_script:
+  - apt-get update -yqq
+  - apt-get install git unzip -yqq
+  - curl -sS https://getcomposer.org/installer | php
+  - php composer.phar install --prefer-dist --no-progress --no-suggest
 
 variables:
   RELEASE_MAJOR: 1
@@ -28,6 +36,24 @@ phpunit:
     - php bin/phpunit --filter=testcomputeTVAFoodProduct
     - php bin/phpunit --filter=testcomputeOtherTVAFoodProduct
 
+phpstan:
+  stage: PhpStan
+  script:
+    - vendor/bin/phpstan analyse src --level max
+  #allow_failure: false
+
+php_cs_fixer:
+  stage: Php-cs-fixer
+  script:
+    - vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --dry-run --diff
+  #allow_failure: false
+
+rector:
+  stage: Rector
+  script:
+    - vendor/bin/rector process src --dry-run
+  #allow_failure: false
+
 coverage-test-job:
   image : php:7.4-apache
   stage: CodeCoverage    
@@ -38,13 +64,6 @@ coverage-test-job:
     # - docker-php-ext-enable xdebug
     # - php bin/phpunit --coverage-html public/test-coverage
     - echo "Coverage Code analysis is done !"
-
-deploy-job:
-  stage: deploy  
-  environment: production
-  script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
 
 release_job:
   stage: release
@@ -60,15 +79,10 @@ release_job:
     description: "$RELEASE_VERSION"
     ref: '$CI_COMMIT_SHA'
 
-pages:
-  stage: pages
-  script:
-    - echo "Building and deploying GitLab Pages..."
-    - mkdir .public
-    - cp -r * .public
-    - mv .public public
-    - echo "GitLab Pages built and deployed successfully."
-
   artifacts:
     paths:
       - public/
+  
+cache:
+  paths:
+    - vendor/
