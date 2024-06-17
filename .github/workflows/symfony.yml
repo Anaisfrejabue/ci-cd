@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  symfony-tests:
+  symfony-phpUnit:
     runs-on: ubuntu-latest
     steps:
       - uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
@@ -39,8 +39,6 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
-        env:
-          DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
         run: php bin/phpunit --filter=testcomputeTVAFoodProduct2
 
   phpstan:
@@ -83,22 +81,45 @@ jobs:
       - name: Rector
         run: php vendor/bin/rector process --dry-run
         continue-on-error: true
-        
   release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Git
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-      - name: Create Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RELEASE_MAJOR=1
-          RELEASE_MINOR=0
-          RELEASE_PATCH=${GITHUB_RUN_NUMBER}
-          RELEASE_VERSION="v.${RELEASE_MAJOR}.${RELEASE_MINOR}.${RELEASE_PATCH}"
-          git tag $RELEASE_VERSION
-          git push https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git $RELEASE_VERSION
+      runs-on: ubuntu-latest
+  
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+  
+        - name: Set up Git
+          run: |
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+  
+        - name: Create Release Tag
+          env:
+            RELEASE_MAJOR: 1
+            RELEASE_MINOR: 0
+            RELEASE_PATCH: ${{ github.run_number }}
+          run: |
+            RELEASE_VERSION="v.${RELEASE_MAJOR}.${RELEASE_MINOR}.${RELEASE_PATCH}"
+            git tag $RELEASE_VERSION
+            git push origin $RELEASE_VERSION
+  
+        - name: Create GitHub Release
+          env:
+            RELEASE_MAJOR: 1
+            RELEASE_MINOR: 0
+            RELEASE_PATCH: ${{ github.run_number }}
+          run: |
+            RELEASE_VERSION="v.${RELEASE_MAJOR}.${RELEASE_MINOR}.${RELEASE_PATCH}"
+            curl -s \
+              -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              -d '{
+                "tag_name": "'"$RELEASE_VERSION"'",
+                "target_commitish": "main",
+                "name": "'"$RELEASE_VERSION"'",
+                "body": "Release version '"$RELEASE_VERSION"'",
+                "draft": false,
+                "prerelease": false
+              }' \
+              https://api.github.com/repos/${{ github.repository }}/releases
