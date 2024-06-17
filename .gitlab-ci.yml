@@ -1,11 +1,12 @@
 stages:
+  - release
   - build
   - UnitTests
   - CodeCoverage
   - PhpStan
   - Php-cs-fixer
   - Rector
-  - release
+
 
 variables:
   RELEASE_MAJOR: 1
