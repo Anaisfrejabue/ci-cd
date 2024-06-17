@@ -83,23 +83,6 @@ jobs:
       - name: Rector
         run: php vendor/bin/rector process --dry-run
         continue-on-error: true
-
-  code_coverage:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
-        with:
-          php-version: '7.4'
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-      - name: Install Xdebug
-        run: |
-          pecl install xdebug
-          docker-php-ext-enable xdebug
-      - name: Code Coverage Analysis
-        run: php bin/phpunit --coverage-html public/test-coverage
-        continue-on-error: true
         
   release:
     runs-on: ubuntu-latest
