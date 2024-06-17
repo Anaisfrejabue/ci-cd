@@ -93,10 +93,12 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
       - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
           RELEASE_MAJOR=1
           RELEASE_MINOR=0
           RELEASE_PATCH=${GITHUB_RUN_NUMBER}
           RELEASE_VERSION="v.${RELEASE_MAJOR}.${RELEASE_MINOR}.${RELEASE_PATCH}"
           git tag $RELEASE_VERSION
-          git push origin $RELEASE_VERSION
+          git push https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git $RELEASE_VERSION
