@@ -81,9 +81,9 @@ jobs:
       - name: Rector
         run: php vendor/bin/rector process --dry-run
         continue-on-error: true
+
   release:
       runs-on: ubuntu-latest
-  
       steps:
         - name: Checkout code
           uses: actions/checkout@v4
@@ -93,33 +93,31 @@ jobs:
             git config user.name "github-actions"
             git config user.email "github-actions@github.com"
   
-        - name: Create Release Tag
+        - name: Determine Release Version
+          id: vars
           env:
             RELEASE_MAJOR: 1
             RELEASE_MINOR: 0
             RELEASE_PATCH: ${{ github.run_number }}
-          run: |
-            RELEASE_VERSION="v.${RELEASE_MAJOR}.${RELEASE_MINOR}.${RELEASE_PATCH}"
-            git tag $RELEASE_VERSION
-            git push origin $RELEASE_VERSION
+          run: echo "RELEASE_VERSION=v.${RELEASE_MAJOR}.${RELEASE_MINOR}.${RELEASE_PATCH}" >> $GITHUB_ENV
   
         - name: Create GitHub Release
+          uses: actions/create-release@v1
           env:
-            RELEASE_MAJOR: 1
-            RELEASE_MINOR: 0
-            RELEASE_PATCH: ${{ github.run_number }}
-          run: |
-            RELEASE_VERSION="v.${RELEASE_MAJOR}.${RELEASE_MINOR}.${RELEASE_PATCH}"
-            curl -s \
-              -X POST \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Content-Type: application/json" \
-              -d '{
-                "tag_name": "'"$RELEASE_VERSION"'",
-                "target_commitish": "main",
-                "name": "'"$RELEASE_VERSION"'",
-                "body": "Release version '"$RELEASE_VERSION"'",
-                "draft": false,
-                "prerelease": false
-              }' \
-              https://api.github.com/repos/${{ github.repository }}/releases
+            GITHUB_TOKEN: ${{ secrets.PAT }}
+          with:
+            tag_name: ${{ env.RELEASE_VERSION }}
+            release_name: ${{ env.RELEASE_VERSION }}
+            body: "Release version ${{ env.RELEASE_VERSION }}"
+            draft: false
+            prerelease: false
+  
+        - name: Upload Release Asset
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.PAT }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: ./path/to/your/asset.zip
+            asset_name: asset.zip
+            asset_content_type: application/zip
